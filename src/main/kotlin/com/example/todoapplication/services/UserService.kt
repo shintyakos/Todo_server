@@ -27,14 +27,22 @@ class UserService: UserDetailsService {
         }
     }
 
+    fun getUser(username: String): UserData {
+        return userRepository.findByUserName(username).let {
+            UserData(
+                id = it.id,
+                username = it.name,
+                password = it.password,
+                email = it.email
+            )
+        }
+    }
+
     override fun loadUserByUsername(username: String?): UserDetails {
         val user = userRepository.findByUserName(username ?: "")
-        println("User: $user")
         val userDetails = MyUserDetails(
-            id = user.id,
-            username = user.name,
+            username = user.email,
             password = user.password,
-            email = user.email,
             authorities = AuthorityUtils.createAuthorityList("ROLE_USER")
         )
         return userDetails
