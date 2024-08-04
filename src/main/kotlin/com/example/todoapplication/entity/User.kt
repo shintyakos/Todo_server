@@ -9,8 +9,8 @@ import java.time.LocalDate
 import java.util.*
 
 @Entity
-@Table(name = "Users")
-data class Users (
+@Table(name = "users")
+data class User (
     @Id
     @GeneratedValue
     @Column(name = "id")
